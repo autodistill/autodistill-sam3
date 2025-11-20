@@ -1,0 +1,61 @@
+<div align="center">
+  <p>
+    <a align="center" href="" target="_blank">
+      <img
+        width="850"
+        src="https://media.roboflow.com/open-source/autodistill/autodistill-banner.png"
+      >
+    </a>
+  </p>
+</div>
+
+# Autodistill Segment Anything 3 Module
+
+This repository contains the code supporting the Segment Anything 3 base model for use with [Autodistill](https://github.com/autodistill/autodistill).
+
+Segment Anything 3 (SAM3), developed by Meta Research, is a state-of-the-art zero-shot image segmentation model. You can prompt SAM3 with image regions and open text prompts.
+
+Autodistill currently supports using text prompts to auto-label images for use in fine-tuning smaller vision models, such as an RF-DETR object detection model.
+
+Read the full [Autodistill documentation](https://autodistill.github.io/autodistill/).
+
+Read the [SAM3 Autodistill documentation](https://autodistill.github.io/autodistill/base_models/sam3/).
+
+## Installation
+
+To use SAM3 with Autodistill, you need to install the following dependency:
+
+
+```bash
+pip3 install autodistill-sam3
+```
+
+## Quickstart
+
+```python
+from autodistill_sam3 import SegmentAnything3
+
+# define an ontology to map class names to our SAM3 prompt
+# the ontology dictionary has the format {caption: class}
+# where caption is the prompt sent to the base model, and class is the label that will
+# be saved for that caption in the generated annotations
+# then, load the model
+base_model = SegmentAnything3(
+    ontology=CaptionOntology(
+        {
+            "person": "person",
+            "a forklift": "forklift"
+        }
+    )
+)
+base_model.label("./context_images", extension=".jpeg")
+```
+
+
+## License
+
+[add license information here]
+
+## 🏆 Contributing
+
+We love your input! Please see the core Autodistill [contributing guide](https://github.com/autodistill/autodistill/blob/main/CONTRIBUTING.md) to get started. Thank you 🙏 to all our contributors!
