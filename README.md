@@ -49,7 +49,7 @@ import supervision as sv
 base_model = SegmentAnything3(
     ontology=CaptionOntology(
         {
-            "coffee fruit": "coffee fruit",
+            "fruit": "fruit",
             "leaf": "leaf"
         }
     )
@@ -61,15 +61,16 @@ detections = base_model.predict("image.jpg")
 image = load_image("image.jpg", return_format="cv2")
 
 # visualise results
-label_annotator = sv.LabelAnnotator()
-box_annotator = sv.MaskAnnotator()
-annotated_frame = label_annotator.annotate(
+label_annotator = sv.LabelAnnotator(text_position=sv.Position.CENTER)
+mask_annotator = sv.MaskAnnotator()
+annotated_frame = mask_annotator.annotate(
     scene=image.copy(),
     detections=detections
 )
-annotated_frame = box_annotator.annotate(
+annotated_frame = label_annotator.annotate(
     scene=annotated_frame,
-    detections=detections
+    detections=detections,
+    labels=[base_model.ontology.classes()[class_id] for class_id in detections.class_id]
 )
 sv.plot_image(annotated_frame)
 

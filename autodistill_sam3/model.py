@@ -39,7 +39,7 @@ class SegmentAnything3(DetectionBaseModel):
             preds = item.predictions
 
             if len(preds) == 0:
-                continue
+              continue
 
             all_polygons_coords = []
             all_confidences = []
@@ -77,4 +77,8 @@ class SegmentAnything3(DetectionBaseModel):
 
             all_detections.append(detections)
 
-        return sv.Detections.merge(all_detections)
+        detections = sv.Detections.merge(all_detections).with_nms()
+        detections = detections[detections.confidence > confidence]
+
+        return detections
+        
