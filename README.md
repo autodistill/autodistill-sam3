@@ -80,7 +80,7 @@ base_model.label("./images_to_label", extension=".jpeg")
 
 Here is an example output:
 
-<img width="765" height="660" alt="fruit" src="https://github.com/user-attachments/assets/f1de15a5-f49d-4ad1-8187-784395561c6c" />
+<img width="944" height="944" alt="Untitled" src="https://github.com/user-attachments/assets/dbcc4291-a01f-4ca4-a6c2-4a81513b1ff2" />
 
 ## License
 
