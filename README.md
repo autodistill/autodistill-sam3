@@ -78,6 +78,10 @@ sv.plot_image(annotated_frame)
 base_model.label("./images_to_label", extension=".jpeg")
 ```
 
+Here is an example output:
+
+<img width="765" height="660" alt="fruit" src="https://github.com/user-attachments/assets/f1de15a5-f49d-4ad1-8187-784395561c6c" />
+
 ## License
 
 SAM 3 is licensed under a custom SAM license. [See the SAM 3 license in the official facebookresearch/sam3 repository](https://github.com/facebookresearch/sam3/blob/main/LICENSE).
