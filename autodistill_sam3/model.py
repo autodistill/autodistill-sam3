@@ -32,10 +32,14 @@ class SegmentAnything3(DetectionBaseModel):
             ],
             format="polygon",
         )
+
         all_detections = []
 
         for item in results.prompt_results:
             preds = item.predictions
+
+            if len(preds) == 0:
+                continue
 
             all_polygons_coords = []
             all_confidences = []

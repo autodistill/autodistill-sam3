@@ -17,6 +17,8 @@ Segment Anything 3 (SAM3), developed by Meta Research, is a state-of-the-art zer
 
 Autodistill currently supports using text prompts to auto-label images for use in fine-tuning smaller vision models, such as an RF-DETR object detection model.
 
+The Autodistill SAM 3 package only works on a GPU.
+
 Read the full [Autodistill documentation](https://autodistill.github.io/autodistill/).
 
 Read the [SAM3 Autodistill documentation](https://autodistill.github.io/autodistill/base_models/sam3/).
@@ -34,8 +36,12 @@ pip3 install autodistill-sam3
 
 ```python
 from autodistill_sam3 import SegmentAnything3
+from autodistill.detection import CaptionOntology
+from autodistill.helpers import load_image
 
-# define an ontology to map class names to our SAM3 prompt
+import supervision as sv
+
+# define an ontology to map class names to our SAM 3 prompt
 # the ontology dictionary has the format {caption: class}
 # where caption is the prompt sent to the base model, and class is the label that will
 # be saved for that caption in the generated annotations
@@ -43,18 +49,37 @@ from autodistill_sam3 import SegmentAnything3
 base_model = SegmentAnything3(
     ontology=CaptionOntology(
         {
-            "person": "person",
-            "a forklift": "forklift"
+            "coffee fruit": "coffee fruit",
+            "leaf": "leaf"
         }
     )
 )
-base_model.label("./context_images", extension=".jpeg")
-```
 
+# run inference on a single iamge
+detections = base_model.predict("image.jpg")
+
+image = load_image("image.jpg", return_format="cv2")
+
+# visualise results
+label_annotator = sv.LabelAnnotator()
+box_annotator = sv.MaskAnnotator()
+annotated_frame = label_annotator.annotate(
+    scene=image.copy(),
+    detections=detections
+)
+annotated_frame = box_annotator.annotate(
+    scene=annotated_frame,
+    detections=detections
+)
+sv.plot_image(annotated_frame)
+
+# label a folder of images
+base_model.label("./images_to_label", extension=".jpeg")
+```
 
 ## License
 
-[add license information here]
+SAM 3 is licensed under a custom SAM license. [See the SAM 3 license in the official facebookresearch/sam3 repository](https://github.com/facebookresearch/sam3/blob/main/LICENSE).
 
 ## 🏆 Contributing
 
