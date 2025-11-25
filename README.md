@@ -27,10 +27,19 @@ Read the [SAM3 Autodistill documentation](https://autodistill.github.io/autodist
 
 To use SAM3 with Autodistill, you need to install the following dependency:
 
-
 ```bash
 pip3 install autodistill-sam3
 ```
+
+You will also need to set a Roboflow API key in your environment:
+
+```
+export ROBOFLOW_API_KEY=YOUR_KEY
+```
+
+This key will allow you to download the model weights required to use this package.
+
+[Learn how to retrieve your Roboflow API key](https://docs.roboflow.com/developer/authentication/find-your-roboflow-api-key).
 
 ## Quickstart
 
