@@ -21,8 +21,6 @@ The Autodistill SAM 3 package only works on a GPU.
 
 Read the full [Autodistill documentation](https://autodistill.github.io/autodistill/).
 
-Read the [SAM3 Autodistill documentation](https://autodistill.github.io/autodistill/base_models/sam3/).
-
 ## Installation
 
 To use SAM3 with Autodistill, you need to install the following dependency:
